@@ -1,13 +1,12 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :update, :destroy, :devices]
+  before_action :set_employee, only: [:show, :update, :destroy, :devises]
 def index
   @employees = Employee.all
-
   render json: @employees
 end
 def devices
-  @devices = @employee.devices
-    render json: @devices
+  @devises = @employee.devises
+    render json: @devises
 end
 def new
   @employee = Employee.new
