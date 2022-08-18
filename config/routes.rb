@@ -1,14 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :users
-  get '/auth/login', to: 'authentication#login'
-  resources :devises
 
-  resources :employees do
-    member do
-      get 'devises'
-    end
-  end
+
+  resources :employees
 
 
 end

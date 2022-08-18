@@ -1,15 +1,10 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :update, :destroy, :devises]
+  before_action :set_employee, only: [:show, :update, :destroy]
   #after_action :user_signup, only: [:create]
 
 def index
   @employees = Employee.all
   render json: @employees, serializer: EmployeeSerializer
-end
-
-def devices
-  @devises = @employee.devises
-    render json: @devises, serializer: DeviseSerializer
 end
 
 def new
@@ -58,7 +53,7 @@ private
   end
 
 
-  
+
 
 
 

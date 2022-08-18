@@ -15,27 +15,15 @@ ActiveRecord::Schema.define(version: 2022_08_17_054510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "devises", force: :cascade do |t|
-    t.string "name"
-    t.string "assigned_to"
-    t.string "devise_type"
-    t.string "os"
-    t.string "service_tag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "employee_id"
-    t.index ["employee_id"], name: "index_devises_on_employee_id"
-  end
-
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.bigint "phonenumber"
     t.string "emp_id"
     t.string "devices"
     t.string "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "phonenumber"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -49,13 +37,12 @@ ActiveRecord::Schema.define(version: 2022_08_17_054510) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
+    t.bigint "employee_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "employee_id"
     t.index ["employee_id"], name: "index_users_on_employee_id"
   end
 
-  add_foreign_key "devises", "employees"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "employees"
 end
