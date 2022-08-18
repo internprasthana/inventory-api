@@ -10,27 +10,20 @@ class UsersController < ApplicationController
 
   # GET /users/{username}
   def show
-    render json: @user, status: :ok
+    render json: @users, status: :ok
   end
 
   # POST /users
   def create
     @user = User.new(user_params)
     if @user.save
-      render json: @user, status: :created
+      render json: @users
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity
     end
   end
 
-  # PUT /users/{username}
-  def update
-    unless @user.update(user_params)
-      render json: { errors: @user.errors.full_messages },
-             status: :unprocessable_entity
-    end
-  end
 
   # DELETE /users/{username}
   def destroy
@@ -40,14 +33,12 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find_by_username!(params[:_username])
+    @user = User.find_by(params[:id])
     rescue ActiveRecord::RecordNotFound
       render json: { errors: 'User not found' }, status: :not_found
   end
 
   def user_params
-    params.permit(
-      :avatar, :username, :email, :password, :password_confirmation
-    )
+    params.permit(:email, :password)
   end
 end

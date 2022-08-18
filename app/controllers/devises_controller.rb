@@ -3,18 +3,18 @@ class DevisesController < ApplicationController
 def index
   @devises = Devise.all
 
-  render json: @devises
+  render json: @devises, serializer: DeviseSerializer
 end
 
 def show
-  render json: @devise
+  render json: @devises, serializer: DeviseSerializer
 end
 
 def create
   @devise = Devise.new(devise_params)
 
   if @devise.save
-    render json: @devise, status: :created, location: @devise
+    render json: @devise, serializer: DeviseSerializer
   else
     render json: @devise.errors, status: :unprocessable_entity
   end
@@ -22,7 +22,7 @@ end
 
 def update
   if @devise.update(devise_params)
-    render json: @devise
+    render json: @devise, serializer: DeviseSerializer
   else
     render json: @devise.errors, status: :unprocessable_entity
   end
