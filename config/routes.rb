@@ -17,10 +17,6 @@ Rails.application.routes.draw do
   post 'login',to: 'sessions#create'
   delete 'logout',to: 'sessions#destroy'
 
-  # post 'password/forgot', to: 'password#forgot'
-  # post 'password/reset', to: 'password#reset'
-  #
-  # put 'password/update', to: 'password#update'
 
 
 end
