@@ -1,8 +1,9 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :update, :destroy]
+
   def index
     @devices = Device.all
-    render json: @devices,status: :ok
+    render json: @devices, serializer: DeviceSerializer, status: :ok
   end
 
   def new
@@ -11,13 +12,13 @@ class DevicesController < ApplicationController
   end
 
   def show
-    render json: @device,status: :ok
+    render json: @device, serializer: DeviceSerializer, status: :ok
   end
 
   def create
     @device = Device.new(device_params)
     if @device.save
-      render json: @device, status: :created, location: @device
+      render json: @device, serializer: DeviceSerializer, status: :created
     else
       render json: @device.errors, status: :unprocessable_entity
     end
@@ -25,7 +26,7 @@ class DevicesController < ApplicationController
 
   def update
     if @device.update(device_params)
-      render json: @device
+      render json: @device, serializer: DeviceSerializer, status: :ok
     else
       render json: @device.errors, status: :unprocessable_entity
     end
@@ -33,6 +34,7 @@ class DevicesController < ApplicationController
 
   def destroy
     @device.destroy
+    render head :no_content
   end
 
   private
