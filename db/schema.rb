@@ -12,8 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2022_08_19_051444) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
 
   create_table "employees", force: :cascade do |t|
     t.string "name"
@@ -21,6 +23,13 @@ ActiveRecord::Schema.define(version: 2022_08_19_051444) do
     t.bigint "phone_number"
     t.string "emp_id"
     t.string "designation"
+
+  create_table "devices", force: :cascade do |t|
+    t.string "name"
+    t.string "device_type"
+    t.string "os"
+    t.string "service_tag"
+
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -44,4 +53,5 @@ ActiveRecord::Schema.define(version: 2022_08_19_051444) do
 
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "employees"
+
 end
