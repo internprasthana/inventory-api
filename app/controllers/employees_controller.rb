@@ -3,16 +3,15 @@ class EmployeesController < ApplicationController
 
   def index
     employees = Employee.all
-    render json: employees, serializer: EmployeeSerializer
+    render json: employees, each_serializer: EmployeeSerializer
   end
 
   def show
-    render json: @employee, serializer: EmployeeSerializer
+    render json: @employee, serializer: EmployeeSerializer, inludes: '**'
   end
 
   def create
     @employee = Employee.create!(employee_params)
-    # byebug
     @employee.create_employee_user_roles(params[:roles])
     render json: @employee, serializer: EmployeeSerializer
   end

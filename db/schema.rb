@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_19_051444) do
-
+ActiveRecord::Schema.define(version: 2022_08_19_085015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "devices", force: :cascade do |t|
+    t.string "name"
+    t.string "device_type"
+    t.string "os"
+    t.string "service_tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_devices_on_employee_id"
+  end
 
   create_table "employees", force: :cascade do |t|
     t.string "name"
@@ -23,13 +32,6 @@ ActiveRecord::Schema.define(version: 2022_08_19_051444) do
     t.bigint "phone_number"
     t.string "emp_id"
     t.string "designation"
-
-  create_table "devices", force: :cascade do |t|
-    t.string "name"
-    t.string "device_type"
-    t.string "os"
-    t.string "service_tag"
-
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -51,7 +53,7 @@ ActiveRecord::Schema.define(version: 2022_08_19_051444) do
     t.index ["employee_id"], name: "index_users_on_employee_id"
   end
 
+  add_foreign_key "devices", "employees"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "employees"
-
 end

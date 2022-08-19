@@ -4,7 +4,7 @@ class Employee < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  # # validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :emp_id, presence: true, uniqueness: true
   validates :designation, :phone_number, presence: true
 
