@@ -3,7 +3,7 @@ class DevicesController < ApplicationController
 
   def index
     @devices = Device.all
-    render json: @devices, serializer: DeviceSerializer, status: :ok
+    render json: @devices, each_serializer: DeviceSerializer, status: :ok
   end
 
   def new

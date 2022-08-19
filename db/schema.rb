@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_17_090057) do
+ActiveRecord::Schema.define(version: 2022_08_19_085015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,38 @@ ActiveRecord::Schema.define(version: 2022_08_17_090057) do
     t.string "service_tag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_devices_on_employee_id"
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.bigint "phone_number"
+    t.string "emp_id"
+    t.string "designation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.string "roles"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.bigint "employee_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_users_on_employee_id"
+  end
+
+  add_foreign_key "devices", "employees"
+  add_foreign_key "user_roles", "users"
+  add_foreign_key "users", "employees"
 end
