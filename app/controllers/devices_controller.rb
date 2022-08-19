@@ -43,6 +43,6 @@ class DevicesController < ApplicationController
     end
 
     def device_params
-      params.require(:device).permit(:name,:device_type,:os,:service_tag)
+      params.require(:device).permit(:name, :device_type, :os, :service_tag, :employee_id)
     end
 end
