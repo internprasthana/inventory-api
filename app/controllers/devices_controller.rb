@@ -18,6 +18,7 @@ class DevicesController < ApplicationController
        @devices = Device.where("name LIKE ? OR service_tag LIKE ?", "%#{@query}%", "%#{@query}%")
        render json: @devices
     end
+
    end
     def create
       @device = Device.new(device_params)
@@ -33,7 +34,7 @@ class DevicesController < ApplicationController
       else
         render json: @device.errors, status: :unprocessable_entity
       end
-    end
+
     def destroy
       @device.destroy
       render head :no_content
