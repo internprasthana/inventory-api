@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users
-  post '/auth/login', to: 'authentications#login'
+  get '/auth/login', to: 'authentications#login'
 
   resources :employees
   get '/employees/search', to: 'employees#search'
