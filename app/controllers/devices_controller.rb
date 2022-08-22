@@ -34,7 +34,7 @@ class DevicesController < ApplicationController
 
   def destroy
     @device.destroy
-    render head :no_content
+    render :no_content
   end
 
   def search
