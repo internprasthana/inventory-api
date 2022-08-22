@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  resources :users
-  post '/auth/login', to: 'authentications#login'
-
-  resources :employees
+  
+  get '/auth/login', to: 'authentications#login'
   get '/employees/search', to: 'employees#search'
-
-  resources :devices
   get '/devices/search',to: 'devices#search'
-
+  
+  resources :users
+  resources :employees
+  resources :devices
 end
