@@ -28,6 +28,13 @@ class EmployeesController < ApplicationController
     @employee.destroy
   end
 
+  def search
+         @query = params[:query]
+     if @query.present?
+        employees = Employee.where("name LIKE ? OR designation LIKE ? OR email LIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%")
+        render json: employees
+     end
+    end
 
   private
 
