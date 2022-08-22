@@ -10,6 +10,14 @@ class EmployeesController < ApplicationController
     render json: @employee, serializer: EmployeeSerializer, inludes: '**'
   end
 
+  def search
+       @query = params[:query]
+   if @query.present?
+      employees = Employee.where("name LIKE ? OR designation LIKE ? OR email LIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%")
+      render json: employees
+   end
+  end
+
   def create
     @employee = Employee.create!(employee_params)
     @employee.create_employee_user_roles(params[:roles])
