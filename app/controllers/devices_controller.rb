@@ -37,6 +37,14 @@ class DevicesController < ApplicationController
     render head :no_content
   end
 
+  def search
+        @query = params[:query]
+    if @query.present?
+       @devices = Device.where("name LIKE ? OR service_tag LIKE ?", "%#{@query}%", "%#{@query}%")
+       render json: @devices
+    end
+   end
+
   private
     def set_device
       @device = Device.find(params[:id])
