@@ -1,5 +1,5 @@
 class Employee < ApplicationRecord
-  has_one :user
+  has_one :user, :dependent => :destroy
   has_many :devices
 
   validates :name, presence: true
