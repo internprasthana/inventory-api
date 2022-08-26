@@ -10,8 +10,8 @@ class AuthenticationsController < ApplicationController
     end
   end
 
-  private
-  def login_params
-    params.permit(:email, :password_digest)
-  end
+  # private
+  # def login_params
+  #   params.permit(:email, :password_digest)
+  # end
 end
